@@ -1,0 +1,250 @@
+{% extends "dictionary/layout.html" %}
+
+{% block body %}
+    <div class="reg-title">
+        {{ aircraft.registration }}
+    </div>
+    <div class="container">
+        <div class="box">
+            <div class="title">
+                <h1>Aircraft</h1>
+            </div>
+            <div class="teste">
+                <div class="text-container">
+                    <span class="left-text">ICAO Classification:</span>
+                    {% if aircraft.typecode %}
+                        <span class="right-text">
+                            {% if aircraft.manufacturericao %}
+                                {{ aircraft.manufacturericao }}
+                            {% endif %}
+                            {{ aircraft.typecode }}
+                            {% if aircraft.icaoaircrafttype %}
+                                ({{ aircraft.icaoaircrafttype }})
+                            {% endif %}
+                        </span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}                    
+                </div>
+                <!--Category Description-->    
+                <div class="text-container">
+                    <span class="left-text">Category Description:</span>
+                    {% if aircraft.categoryDescription %}
+                        <span class="right-text">{{ aircraft.categoryDescription }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Manufacturer-->    
+                <div class="text-container">
+                    <span class="left-text">Manufacturer:</span>
+                    {% if aircraft.manufacturername %}
+                        <span class="right-text">{{ aircraft.manufacturername }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Model--> 
+                <div class="text-container">
+                    <span class="left-text">Model:</span>
+                    {% if aircraft.model %}
+                        <span class="right-text">{{ aircraft.model }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Engines--> 
+                <div class="text-container">
+                    <span class="left-text">Engines:</span>
+                    {% if aircraft.engines %}
+                        <span class="right-text">{{ aircraft.engines }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Serial number--> 
+                <div class="text-container">
+                    <span class="left-text">Serial number:</span>
+                    {% if aircraft.serialnumber %}
+                        <span class="right-text">{{ aircraft.serialnumber }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Line number--> 
+                <div class="text-container">
+                    <span class="left-text">Line number:</span>
+                    {% if aircraft.linenumber %}
+                        <span class="right-text">{{ aircraft.linenumber }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Age--> 
+                <div class="text-container">
+                    <span class="left-text">Age:</span>
+                    {% if age %}
+                        <span class="right-text">{{ age }} years ({{ aircraft.built }})</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--First flight--> 
+                <div class="text-container">
+                    <span class="left-text">First flight:</span>
+                    {% if aircraft.firstflightdate %}
+                        <span class="right-text">{{ aircraft.firstflightdate }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Notes--> 
+                <div class="text-container">
+                    <span class="left-text">Notes:</span>
+                    {% if aircraft.notes %}
+                        <textarea class="right-text">{{ aircraft.notes }}</textarea>
+                    {% else %}
+                        <textarea class="form-control">N/A</textarea>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="title">
+                <h1>Registration</h1>
+            </div>
+            <div class="teste">
+                <!--Mode S Code (hex)-->    
+                <div class="text-container">
+                    <span class="left-text">Mode S Code (hex):</span>
+                    {% if aircraft.icao24 %}
+                        <span class="right-text">{{ aircraft.icao24 }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Registration-->    
+                <div class="text-container">
+                    <span class="left-text">Registration:</span>
+                    {% if aircraft.registration %}
+                        <span class="right-text">{{ aircraft.registration }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Registered since-->    
+                <div class="text-container">
+                    <span class="left-text">Registered since:</span>
+                    {% if aircraft.registered %}
+                        <span class="right-text">{{ aircraft.registered }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Registered until-->    
+                <div class="text-container">
+                    <span class="left-text">Registered until:</span>
+                    {% if aircraft.reguntil %}
+                        <span class="right-text">{{ aircraft.reguntil }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Owner-->    
+                <div class="text-container">
+                    <span class="left-text">Owner:</span>
+                    {% if aircraft.owner %}
+                        <span class="right-text">{{ aircraft.owner }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div> 
+                <!--Operator-->    
+                <div class="text-container">
+                    <span class="left-text">Operator:</span>
+                    {% if aircraft.operator %}
+                        <span class="right-text">{{ aircraft.operator }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Airline Callsign-->    
+                <div class="text-container">
+                    <span class="left-text">Airline Callsign:</span>
+                    {% if aircraft.operatorcallsign %}
+                        <span class="right-text">{{ aircraft.operatorcallsign }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Airline ICAO-->    
+                <div class="text-container">
+                    <span class="left-text">Airline ICAO:</span>
+                    {% if aircraft.operatoricao %}
+                        <span class="right-text">{{ aircraft.operatoricao }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>
+                <!--Airline IATA-->    
+                <div class="text-container">
+                    <span class="left-text">Airline IATA:</span>
+                    {% if aircraft.operatoriata %}
+                        <span class="right-text">{{ aircraft.operatoriata }}</span>
+                    {% else %}
+                        <span class="right-text">N/A</span>
+                    {% endif %}
+                </div>                                
+            </div>
+        </div>
+    </div>
+    <div class="table-form">
+        <div class="reg-title">
+            Flights
+        </div>
+        <!--Set Table for flights-->
+        <div class="table-size">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">First Seen</th>
+                        <th scope="col">Last Seen</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Callsign</th>
+                        <th scope="col">Est. Origin Airport</th>
+                        <th scope="col">Est. Destination Airport</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if flights %}
+                        {% for flight, flight_info in flights %}
+                            {% ifchanged flight_info.date %}
+                                <th scope="row" class="flight-date">{{ flight_info.date }}, {{ current_date }}</th>
+                            {% endifchanged %}
+                            <tr>
+                                <td>{{ flight_info.firstSeenHour }}:{{ flight_info.firstSeenMinute }} UTC</td>
+                                <td>{{ flight_info.lastSeenHour }}:{{ flight_info.lastSeenMinute }} UTC </td>
+                                <td>{{ flight_info.duration }} m</td>
+                                <td>{{ flight.callsign }}</td>
+                                {% if flight.estDepartureAirport %}
+                                    <td>{{ flight.estDepartureAirport }}</td>
+                                {% else %}
+                                    <td>N/A</td>
+                                {% endif %}
+                                {% if flight.estArrivalAirport %}
+                                    <td>{{ flight.estArrivalAirport }}</td>
+                                {% else %}
+                                    <td>N/A</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6">No flights found for this aircraft.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>               
+            </table>    
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "dictionary/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="search-form">
+        <div class="input-group rounded">
+            <input type="search" class="form-control rounded" placeholder="Search (Reg or Company)" id="form" aria-label="Search" aria-describedby="search-addon" />
+            <span class="input-group-text border-0" id="search-addon">
+                <i class="bi bi-search"></i>
+            </span>
+        </div>
+    </div>
+    <div id="show-data" class="table-size">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ICAO24</th>
+                    <th scope="col">Registration</th>
+                    <th scope="col">Operator</th>
+                    <th scope="col">Model</th>
+                </tr>
+            </thead>
+            <tbody id="t-body">
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'dictionary/searchbox.js' %}"></script>
+{% endblock %}
