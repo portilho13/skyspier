@@ -221,22 +221,27 @@
                             {% ifchanged flight_info.date %}
                                 <th scope="row" class="flight-date">{{ flight_info.date }}, {{ current_date }}</th>
                             {% endifchanged %}
-                            <tr>
-                                <td>{{ flight_info.firstSeenHour }}:{{ flight_info.firstSeenMinute }} UTC</td>
-                                <td>{{ flight_info.lastSeenHour }}:{{ flight_info.lastSeenMinute }} UTC </td>
-                                <td>{{ flight_info.duration }} m</td>
-                                <td>{{ flight.callsign }}</td>
-                                {% if flight.estDepartureAirport %}
-                                    <td>{{ flight.estDepartureAirport }}</td>
-                                {% else %}
-                                    <td>N/A</td>
-                                {% endif %}
-                                {% if flight.estArrivalAirport %}
-                                    <td>{{ flight.estArrivalAirport }}</td>
-                                {% else %}
-                                    <td>N/A</td>
-                                {% endif %}
-                            </tr>
+                            <form id="{{ flight_info.id }}" method="POST" action="{% url 'redirect' %}">
+                                <tr onclick="redirect('{{ flight_info.id }}')">
+                                    <td>{{ flight_info.firstSeenHour }}:{{ flight_info.firstSeenMinute }} UTC</td>
+                                    <td>{{ flight_info.lastSeenHour }}:{{ flight_info.lastSeenMinute }} UTC </td>
+                                    <td>{{ flight_info.duration }} m</td>
+                                    <td>{{ flight.callsign }}</td>
+                                    {% if flight.estDepartureAirport %}
+                                        <td>{{ flight.estDepartureAirport }}</td>
+                                    {% else %}
+                                        <td>N/A</td>
+                                    {% endif %}
+                                    {% if flight.estArrivalAirport %}
+                                        <td>{{ flight.estArrivalAirport }}</td>
+                                    {% else %}
+                                        <td>N/A</td>
+                                    {% endif %}
+                                </tr>
+                                <input type="hidden" value="{{ flight.icao24 }}" name="flight">
+                                <input type="hidden" value="{{ flight.firstSeen }}" name="firstSeen">
+                                <input type="hidden" value="{{ flight.lastSeen }}" name="lastSeen">
+                            </form>
                         {% endfor %}
                     {% else %}
                         <tr>
@@ -247,4 +252,10 @@
             </table>    
         </div>
     </div>
+    <script>
+        function redirect(id) {
+            console.log(id);
+            document.getElementById(id).submit();
+        }
+    </script>
 {% endblock %}

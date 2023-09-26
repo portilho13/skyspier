@@ -6,5 +6,7 @@ urlpatterns = [
     path('', views.index, name="index"),
     #path('insert', views.insert, name="insert")
     path("aircraft/<int:id>", views.aircraft, name="aircraft"),
-    path("database/<str:value>", views.database, name="database")
+    path("database/<str:value>", views.database, name="database"),
+    path("redirect_flight/", views.redirect_flight, name="redirect"),
+    #path("flight/", views.flight, name="flight")
 ]

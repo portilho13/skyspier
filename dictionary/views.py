@@ -7,9 +7,10 @@ from opensky_api import OpenSkyApi
 
 
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import Aircraft
 # Create your views here.
@@ -83,7 +84,10 @@ def aircraft(request, id):
 
     flights = api.get_flights_by_aircraft(str(aircraft.icao24), int(past.timestamp()), int(datetime.datetime.now().timestamp()))
 
+    # Transform to JSON
+    id = 0
     flight_data = []
+    flightsJson = []
     if flights:
         for flight in flights:
             first_seen = flight.firstSeen
@@ -117,8 +121,10 @@ def aircraft(request, id):
             # Flight Date
 
             flight_date = first_seen_utc.strftime('%d %B %Y')
+            id += 1
 
             flight_info = {
+                "id": id,
                 "firstSeenHour": hourFirst,
                 "firstSeenMinute": minuteFirst,
                 "lastSeenHour": hourLast,
@@ -129,6 +135,7 @@ def aircraft(request, id):
             flight_data.append(flight_info)
 
 
+    
     return render(request, "dictionary/aircraft.html", {
         "aircraft": aircraft,
         "age": age,
@@ -138,3 +145,14 @@ def aircraft(request, id):
 def database(request, value):
     aircrafts = Aircraft.objects.filter(Q(registration__icontains=value) | Q(operator__icontains=value)).distinct()
     return JsonResponse([aircraft_info.serialize() for aircraft_info in aircrafts], safe=False)
+
+@csrf_exempt
+def redirect_flight(request):
+    if request.method == "POST":
+        flight = request.POST["flight"]
+        firstSeen = request.POST["firstSeen"]
+        lastSeen = request.POST["lastSeen"]
+        print(flight, firstSeen, lastSeen)
+    
+
+    return render(request, "dictionary/flight.html")
