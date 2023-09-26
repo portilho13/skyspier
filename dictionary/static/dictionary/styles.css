@@ -76,6 +76,18 @@
     width: 80%;
 }
 
+.flight-title {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.map {
+    width: 100%;
+    height: 500px;
+    justify-content: center;
+}
+
 @media screen and (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -92,3 +104,4 @@
         margin-right: 5%;
     }
 }
+

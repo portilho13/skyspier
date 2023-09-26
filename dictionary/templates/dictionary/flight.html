@@ -1,10 +1,41 @@
 {% extends "dictionary/layout.html" %}
 {% load static %}
+{% load leaflet_tags %}
 
 {% block body %}
-    <h1>Teste</h1>
-{% endblock %}
+    <div class="flight-title">
+        <h1>Teste</h1>
+    </div>
+    {% leaflet_js %}
+    {% leaflet_css %}
+    <input type="hidden" id="latitude" value="{{ latitude }}">
+    <input type="hidden" id="longitude" value="{{ longitude }}">
+    <div id="map" class="map"></div>
 
-{% block script %}
-    <script src="{% static 'dictionary/flights.js' %}"></script>
+    <!-- JavaScript to initialize the map -->
+    <script>
+        function initialize_map() {
+            var latitudeInput = document.getElementById("latitude");
+            var longitudeInput = document.getElementById("longitude");
+
+            var latitudeData = JSON.parse(latitudeInput.value);
+            var longitudeData = JSON.parse(longitudeInput.value);
+
+            var aircraftRoute = [];
+
+            for (var i = 0; i < latitudeData.length; i++) {
+                aircraftRoute.push([latitudeData[i], longitudeData[i]]);
+            }
+
+            var map = L.map('map').setView([41.242165698, -8.675497298], 13);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 10,
+            }).addTo(map);
+
+            L.polyline(aircraftRoute, { color: 'red' }).addTo(map);
+        }
+
+        initialize_map();  // Call the function to initialize the map
+    </script>
 {% endblock %}

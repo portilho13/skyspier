@@ -149,10 +149,17 @@ def database(request, value):
 @csrf_exempt
 def redirect_flight(request):
     if request.method == "POST":
-        flight = request.POST["flight"]
-        firstSeen = request.POST["firstSeen"]
-        lastSeen = request.POST["lastSeen"]
-        print(flight, firstSeen, lastSeen)
+        icao24 = request.POST["icao24"]
+        firstSeen = int(request.POST["firstSeen"])
+        lastSeen = int(request.POST["lastSeen"])
     
-
-    return render(request, "dictionary/flight.html")
+    track = api.get_track_by_aircraft(icao24, lastSeen)
+    latitude = []
+    longitude = []
+    for s in track.path:
+        latitude.append(s[1])
+        longitude.append(s[2])
+    return render(request, "dictionary/flight.html", {
+        "latitude": latitude,
+        "longitude": longitude
+    })
