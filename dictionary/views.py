@@ -156,10 +156,45 @@ def redirect_flight(request):
     track = api.get_track_by_aircraft(icao24, lastSeen)
     latitude = []
     longitude = []
-    for s in track.path:
-        latitude.append(s[1])
-        longitude.append(s[2])
+    altitude = []
+
+    for s in track.path[::-1]:
+        i = int(s[3] * 3.28)
+        altitude.append({"label": ".", "y": i})
+    
     return render(request, "dictionary/flight.html", {
         "latitude": latitude,
-        "longitude": longitude
+        "longitude": longitude,
+        "altitude": altitude
     })
+
+def grafico(request):
+    user_data_2020 = [
+        { "label": "JAN", "y": 58200 },
+        { "label": "FEB", "y": 59110 },
+        { "label": "MAR", "y": 60320 },
+        { "label": "APR", "y": 61440 },
+        { "label": "MAY", "y": 62580 },
+        { "label": "JUN", "y": 63190 },
+        { "label": "JUL", "y": 64000 },
+        { "label": "AUG", "y": 64290 },
+        { "label": "SEP", "y": 65530 },
+        { "label": "OCT", "y": 65300 },
+        { "label": "NOV", "y": 65340 },
+        { "label": "DEC", "y": 64530 }
+    ]
+    user_data_2021 = [
+        { "label": "JAN", "y": 65100 },
+        { "label": "FEB", "y": 66210 },
+        { "label": "MAR", "y": 66540 },
+        { "label": "APR", "y": 66680 },
+        { "label": "MAY", "y": 67500 },
+        { "label": "JUN", "y": 68850 },
+        { "label": "JUL", "y": 69000 },
+        { "label": "AUG", "y": 70130 },
+        { "label": "SEP", "y": 71050 },
+        { "label": "OCT", "y": 71500 },
+        { "label": "NOV", "y": 72110 },
+        { "label": "DEC", "y": 71820 }
+    ]
+    return render(request, "dictionary/grafico.html", { "user_data_2021": user_data_2021, "user_data_2020": user_data_2020 })
