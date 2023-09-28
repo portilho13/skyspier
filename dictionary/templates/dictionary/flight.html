@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="flight-title">
-        <h1>Teste</h1>
+        <h1>Flight Info</h1>
     </div>
     {% leaflet_js %}
     {% leaflet_css %}
@@ -67,7 +67,7 @@
                     yValueFormatString: "#,##0",
                     dataPoints: {{ altitude|safe }}
                 }]
-            });
+            })
             chart.render();
         
             function toggleDataSeries(e) {
@@ -80,8 +80,9 @@
             }
         
         }
+
     </script>
 
-    <div id="chartContainer" style="width: 100%; height: 360px;"></div>
+    <div id="chartContainer" class="graph"></div>
     <script src="{% static 'canvasjs.min.js' %}"></script>
 {% endblock %}

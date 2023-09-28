@@ -83,9 +83,16 @@
 }
 
 .map {
-    width: 100%;
+    width: auto;
+    display: flex;
+    margin: 20px;
     height: 500px;
     justify-content: center;
+}
+
+.graph {
+    display: flex;
+    margin-top: 20px;
 }
 
 @media screen and (max-width: 768px) {

@@ -221,7 +221,7 @@
                             {% ifchanged flight_info.date %}
                                 <th scope="row" class="flight-date">{{ flight_info.date }}, {{ current_date }}</th>
                             {% endifchanged %}
-                            <form id="{{ flight_info.id }}" method="POST" action="{% url 'redirect' %}">
+                            <form id="{{ flight_info.id }}" method="POST" action="{% url 'flight' %}">
                                 <tr onclick="redirect('{{ flight_info.id }}')">
                                     <td>{{ flight_info.firstSeenHour }}:{{ flight_info.firstSeenMinute }} UTC</td>
                                     <td>{{ flight_info.lastSeenHour }}:{{ flight_info.lastSeenMinute }} UTC </td>
@@ -254,7 +254,6 @@
     </div>
     <script>
         function redirect(id) {
-            console.log(id);
             document.getElementById(id).submit();
         }
     </script>
